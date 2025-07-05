@@ -1,0 +1,19 @@
+Name: kakfa_sarama-api
+Host: 0.0.0.0
+Port: 8888
+Log:
+  level: info
+MaxBytes: 1048576000  # 请求体最大大小 (默认1MB，此处改为1000MB)
+UploadFile:
+  MaxFileNum: 10      # 最大文件数
+  MaxFileSize: 1048576000  # 单个文件最大大小 (1000MB)
+  SavePath: ./upload/ # 文件存储路径
+# 添加 Profiling 配置
+Profiling:
+  ServerAddr: http://192.168.0.201:4040
+  CpuThreshold: 0
+Kafka:
+  Brokers:
+    - 192.168.0.201:19092
+    - 192.168.0.201:29092
+    - 192.168.0.201:39092

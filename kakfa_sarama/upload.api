@@ -1,0 +1,13 @@
+syntax = "v1"
+
+// 上传接口定义
+service file-api {
+	@handler UploadHandler
+	post /upload returns (UploadResponse) // 不定义请求体
+}
+
+type UploadResponse {
+	Code    int    `json:"code"`
+	Message string `json:"message"`
+}
+
