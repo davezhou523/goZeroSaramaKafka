@@ -28,17 +28,7 @@ func NewSyncProducer(brokers []string) sarama.SyncProducer {
 	return producer
 }
 
-func SendMessage(producer sarama.SyncProducer, topic string, key, value string) error {
-	msg := &sarama.ProducerMessage{
-		Topic: topic,
-		Key:   sarama.StringEncoder(key),
-		Value: sarama.StringEncoder(value),
-	}
-
-	_, _, err := producer.SendMessage(msg)
-	return err
-}
-func SendImage(producer sarama.SyncProducer, topic string, key string, data []byte) error {
+func SendMessage(producer sarama.SyncProducer, topic string, key string, data []byte) error {
 	msg := &sarama.ProducerMessage{
 		Topic: topic,
 		Key:   sarama.StringEncoder(key),

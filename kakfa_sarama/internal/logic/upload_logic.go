@@ -56,8 +56,7 @@ func (l *UploadLogic) SendFileToKafka(file multipart.File, filename string) (*ty
 			l.Logger.Info("发送分片 ", "fileId:", fileId, " index:", chunkIndex, " TotalChunks:", payload.TotalChunks)
 			payload.Data = buffer[:n]
 			content, _ := jsonx.Marshal(payload)
-
-			err = kafka.SendImage(l.svcCtx.KafkaProducer, "test-topic", fileId, content)
+			err = kafka.SendMessage(l.svcCtx.KafkaProducer, "test-topic", fileId, content)
 			if err != nil {
 				logx.Errorf("分片发送失败: index=%d, err=%v", chunkIndex, err)
 				return nil, err
@@ -69,7 +68,7 @@ func (l *UploadLogic) SendFileToKafka(file multipart.File, filename string) (*ty
 			payload.Index = chunkIndex
 			payload.TotalChunks = chunkIndex + 1
 			content, _ := jsonx.Marshal(payload)
-			err = kafka.SendImage(l.svcCtx.KafkaProducer, "test-topic", fileId, content)
+			err = kafka.SendMessage(l.svcCtx.KafkaProducer, "test-topic", fileId, content)
 			break
 
 		} else if err != nil {
